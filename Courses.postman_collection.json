@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "069f37f7-d642-43fa-9408-e490df45314b",
+		"_postman_id": "dd7d270f-3dc4-4860-893a-be7f6f99854b",
 		"name": "Courses",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25678350"
+		"_exporter_id": "27148180"
 	},
 	"item": [
 		{
@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rut\": \"112223334\",\r\n    \"name\": \"Nombre\",\r\n    \"email\": \"nombre@alumnos.ucn.cl\",\r\n    \"password\": \"password\",\r\n    \"confirmPassword\": \"pasword\"\r\n}",
+					"raw": "{\r\n    \"rut\": \"19952533\",\r\n    \"name\": \"Nombre\",\r\n    \"email\": \"nombre@alumnos.ucn.cl\",\r\n    \"password\": \"password\",\r\n    \"confirmPassword\": \"password\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -28,6 +28,33 @@
 					"path": [
 						"account",
 						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"nombre@alumnos.ucn.cl\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api}}/account/login",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"account",
+						"login"
 					]
 				}
 			},
