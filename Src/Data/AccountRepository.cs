@@ -61,8 +61,41 @@ public class AccountRepository : IAccountRepository
         return accountDto;
     }
 
+    public async Task<User?> ValidateUserAsync(string email, string password)
+    {
+        User? user = await _dataContext
+            .Users.Where(student => student.Email == email)
+            .FirstOrDefaultAsync();
+        
+        if (user == null)
+        {
+            return null;
+        }
+
+        if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+        {
+            return null; // Contraseña incorrecta
+        }
+
+        return user; // Credenciales válidas
+    }
+
     public async Task<bool> SaveChangesAsync()
     {
         return 0 < await _dataContext.SaveChangesAsync();
+    }
+
+
+    private bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
+    {
+        using (var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt))
+        {
+            var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            for (int i = 0; i < computedHash.Length; i++)
+            {
+                if (computedHash[i] != storedHash[i]) return false;
+            }
+        }
+        return true;
     }
 }
